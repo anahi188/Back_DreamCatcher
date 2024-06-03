@@ -9,11 +9,10 @@ export const databaseProviders = [
         host: 'localhost',
         port: 5432,
         username: 'postgres',
-        password: '1234',
-        database: 'DreamCatcher',
-        entities: [__dirname + '/**/*.entity{.ts,.js}'],
+        password: '12345',
+        database: 'dreamCatcher',
+        entities: [__dirname + '/../**/*.entity{.ts,.js}'], // Asegúrate de que la ruta de las entidades sea correcta
         synchronize: true,
-        dropSchema: true
       });
 
       return dataSource.initialize();
