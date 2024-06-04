@@ -1,18 +1,18 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
 import { UserEntity } from './user.entity';
 import { LikeEntity } from './like.entity';
 
 @Entity('stories')
 export class StoryEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+    @PrimaryGeneratedColumn('uuid', { comment: 'Identificador único de la historia' })
+    id: string;
 
-  @Column({ type: 'varchar', name: 'photo', comment: 'Foto de la historia' })
-  photo: string;
+    @Column({ type: 'varchar', nullable: true, comment: 'Foto de la historia' })
+    photo: string;
 
-  @ManyToOne(() => UserEntity, user => user.stories)
-  user: UserEntity;
+    @ManyToOne(() => UserEntity, user => user.stories)
+    user: UserEntity;
 
-  @OneToMany(() => LikeEntity, like => like.story)
-  likes: LikeEntity[];
+    @OneToMany(() => LikeEntity, like => like.story)
+    likes: LikeEntity[];
 }

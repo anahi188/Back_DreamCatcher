@@ -1,15 +1,15 @@
-import { Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
-import { UserEntity } from './user.entity';
+import { Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { StoryEntity } from './story.entity';
+import { UserEntity } from './user.entity';
 
 @Entity('likes')
 export class LikeEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+    @PrimaryGeneratedColumn('uuid', { comment: 'Identificador único del like' })
+    id: string;
 
-  @ManyToOne(() => UserEntity, user => user.likes)
-  user: UserEntity;
+    @ManyToOne(() => StoryEntity, story => story.likes)
+    story: StoryEntity;
 
-  @ManyToOne(() => StoryEntity, story => story.likes)
-  story: StoryEntity;
+    @ManyToOne(() => UserEntity)
+    user: UserEntity;
 }
