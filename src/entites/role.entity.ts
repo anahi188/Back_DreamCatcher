@@ -1,14 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { UserEntity } from './user.entity';
 
 @Entity('roles')
 export class RoleEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+    @PrimaryGeneratedColumn('uuid', { comment: 'Identificador único del rol' })
+    id: string;
 
-  @Column({ type: 'varchar', unique: true, length: 50, comment: 'Nombre del rol' })
-  name: string;
+    @Column({ type: 'varchar', length: 20, comment: 'Nombre del rol' })
+    name: string;
 
-  @ManyToMany(() => UserEntity, user => user.roles)
-  users: UserEntity[];
+    @OneToMany(() => UserEntity, user => user.role)
+    users: UserEntity[];
 }

@@ -1,3 +1,13 @@
+import { CommentEntity } from 'src/entites/comment.entity';
+import { CountryEntity } from 'src/entites/country.entity';
+import { FriendshipEntity } from 'src/entites/friendship.entity';
+import { LikeEntity } from 'src/entites/like.entity';
+import { PostEntity } from 'src/entites/post.entity';
+import { ResolverEntity } from 'src/entites/resolver.entity';
+import { RoleEntity } from 'src/entites/role.entity';
+import { StateRevisorEntity } from 'src/entites/stateRevisor.entity';
+import { StoryEntity } from 'src/entites/story.entity';
+import { UserEntity } from 'src/entites/user.entity';
 import { DataSource } from 'typeorm';
 
 export const databaseProviders = [
@@ -11,7 +21,7 @@ export const databaseProviders = [
         username: 'postgres',
         password: '12345',
         database: 'dreamCatcher',
-        entities: [__dirname + '/../**/*.entity{.ts,.js}'], // Asegúrate de que la ruta de las entidades sea correcta
+        entities: [UserEntity, RoleEntity, StoryEntity, StateRevisorEntity, ResolverEntity, ResolverEntity, PostEntity, LikeEntity, CountryEntity, CommentEntity , FriendshipEntity],
         synchronize: true,
       });
 

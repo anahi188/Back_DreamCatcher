@@ -1,45 +1,65 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToMany, ManyToMany, JoinTable } from 'typeorm';
-import { StoryEntity } from './story.entity';
-import { LikeEntity } from './like.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, ManyToMany, JoinTable } from 'typeorm';
 import { RoleEntity } from './role.entity';
+import { StoryEntity } from './story.entity';
+import { StateRevisorEntity } from './stateRevisor.entity';
+import { ResolverEntity } from './resolver.entity';
+import { PostEntity } from './post.entity';
+import { CommentEntity } from './comment.entity';
+import { CountryEntity } from './country.entity';
+import { FriendshipEntity } from './friendship.entity';
 
 @Entity('users')
 export class UserEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'varchar', name: 'first_name', length: 40, comment: 'Primer nombre del usuario' })
-  firstName: string;
+  @Column({ type: 'varchar', length: 40, comment: 'Primer nombre del usuario' })
+  firstname: string;
 
-  @Column({ type: 'varchar', name: 'last_name', length: 40, comment: 'Apellido del usuario' })
-  lastName: string;
+  @Column({ type: 'varchar', length: 40, comment: 'Apellido del usuario' })
+  lastname: string;
 
-  @Column({ type: 'varchar', name: 'email', unique: true, comment: 'Correo electrónico del usuario' })
+  @Column({ type: 'varchar', unique: true, comment: 'Correo electrónico del usuario' })
   email: string;
 
-  @Column({ type: 'varchar', name: 'city', length: 100, comment: 'Ciudad del usuario' })
+  @Column({ type: 'varchar', length: 40, comment: 'Ciudad del usuario' })
   city: string;
 
-  @Column({ type: 'varchar', name: 'password', comment: 'Contraseña del usuario' })
+  @Column({ type: 'varchar', comment: 'Contraseña del usuario' })
   password: string;
 
-  @Column({ type: 'varchar', name: 'avatar', nullable: true, comment: 'Avatar del usuario' })
-  avatar: string;
+  @Column({ type: 'varchar', nullable: true, comment: 'Imagen de perfil del usuario' })
+  image: string;
 
-  @Column({ type: 'text', name: 'description', nullable: true, comment: 'Descripción del usuario' })
+  @Column({ type: 'varchar', length: 200, nullable: true, comment: 'Descripción breve sobre el usuario' })
   description: string;
+
+  @ManyToOne(() => CountryEntity, country => country.users)
+  country: CountryEntity;
+
+  @ManyToOne(() => RoleEntity, role => role.users)
+  role: RoleEntity;
 
   @OneToMany(() => StoryEntity, story => story.user)
   stories: StoryEntity[];
 
-  @OneToMany(() => LikeEntity, like => like.user)
-  likes: LikeEntity[];
+  @OneToMany(() => StateRevisorEntity, stateRevisor => stateRevisor.user)
+  stateRevisors: StateRevisorEntity[];
 
-  @ManyToMany(() => RoleEntity, role => role.users)
+  @OneToMany(() => ResolverEntity, resolver => resolver.user)
+  resolvers: ResolverEntity[];
+
+  @OneToMany(() => PostEntity, post => post.user)
+  posts: PostEntity[];
+
+  @OneToMany(() => CommentEntity, comment => comment.user)
+  comments: CommentEntity[];
+
+  @ManyToMany(() => UserEntity, user => user.friends)
   @JoinTable({
-    name: 'user_roles',
-    joinColumn: { name: 'user_id', referencedColumnName: 'id' },
-    inverseJoinColumn: { name: 'role_id', referencedColumnName: 'id' },
+    name: 'friendships',
+    joinColumn: { name: 'user_id', referencedColumnName: 'id' }, // Cambiar el nombre de la columna
+    inverseJoinColumn: { name: 'friend_id', referencedColumnName: 'id' }
   })
-  roles: RoleEntity[];
+  friends: UserEntity[];
 }
