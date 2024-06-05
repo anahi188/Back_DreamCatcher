@@ -1,3 +1,4 @@
+
 import { CommentEntity } from 'src/entites/comment.entity';
 import { CountryEntity } from 'src/entites/country.entity';
 import { FriendshipEntity } from 'src/entites/friendship.entity';
@@ -29,3 +30,4 @@ export const databaseProviders = [
     },
   },
 ];
+

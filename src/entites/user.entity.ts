@@ -1,3 +1,4 @@
+
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, ManyToMany, JoinTable } from 'typeorm';
 import { RoleEntity } from './role.entity';
 import { StoryEntity } from './story.entity';
@@ -63,3 +64,4 @@ export class UserEntity {
   })
   friends: UserEntity[];
 }
+
