@@ -6,5 +6,9 @@ constructor(@Inyect('USER_REPOSITORY') private redonly userRepository :Repositor
     const users = await this.userRepository.find()
   }
 
+  async findOneUser(){
+    const users = await this.userRepository.find()
+  }
+
   //el paginador se hace aqui 
 }
