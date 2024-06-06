@@ -19,6 +19,9 @@ export class UserController {
     @Param('email') email :string, 
     @Param('password') password :string, 
     ){
-    return id;
+
+    const response = await this.userService.findAll ();
+    return respuesta; 
+    
   }
 }
