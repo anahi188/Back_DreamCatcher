@@ -10,4 +10,15 @@ export class UserController {
     const response = await this.userService.findAll ();
     return respuesta; 
   }
+
+  @Get(':id/:name/:lastname/:email/:password')
+  findOneUser(
+    @Param('id') id:number, 
+    @Param('name') name :string, 
+    @Param('lastname') lastname :string, 
+    @Param('email') email :string, 
+    @Param('password') password :string, 
+    ){
+    return id;
+  }
 }
