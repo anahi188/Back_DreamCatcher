@@ -20,7 +20,7 @@ export class UserController {
     @Param('password') password :string, 
     ){
 
-    const response = await this.userService.findAll ();
+    const response = await this.userService.findOneUser();
     return respuesta; 
     
   }
