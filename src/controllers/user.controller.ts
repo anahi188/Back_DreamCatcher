@@ -19,8 +19,7 @@ export class UserController {
     @Param('email') email :string, 
     @Param('password') password :string, 
     ){
-
-    const response = await this.userService.findOneUser();
+    const response = await this.userService.findOneUser(id,name,lastname,email,password);
     return respuesta; 
     
   }
