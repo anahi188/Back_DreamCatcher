@@ -1,42 +1,42 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { UserService } from 'src/services/user.service';
 
 
 @Controller('users')
 export class UserController {
 
+  constructor(private readonly userService: UserService){
+
+  }
+
   @Get()
-  findUsers(
-    @Query() queryParams:any
-  ){
-    return queryParams;
+  async findUsers(){
+    const response = await this.userService.finAll()
+    return response;
   }
   
-  @Get(':id/:name/:lastname/:email/:password')
-  findOneUser(
-    @Param('id') id:number, 
-    @Param('name') name :string, 
-    @Param('lastname') lastname :string, 
-    @Param('email') email :string, 
-    @Param('password') password :string, 
-    ){
-    return id;
+  @Get(':id')
+  async findOneUser(@Param('id') id : string){
+    const response = await this.userService.finAOne(id)
+    return response;
   }
 
   @Post()
-  create(@Body() payload:any){
-    return payload;
+  async createUser(@Body() payload:any){
+    const response = await this.userService.create(payload)
+    return response;
   }
 
   @Put(':id')
-  update(@Param('iduser') id:number, @Body() payload:any){
-    return payload;
+  async updateUser(@Param('id') id:string, @Body() payload:any){
+    const response = await this.userService.update(id, payload)
+    return response;
   }
 
   @Delete(':id')
-  delete(
-    @Param('id') id: number
-    ){
-    return 'Eliminadoñ';
+  async deleteUser(@Param('id') id: string){
+      const response = await this.userService.delete(id);
+      return response;
   }
 
 }

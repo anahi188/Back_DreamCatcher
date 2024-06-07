@@ -20,7 +20,7 @@ export const databaseProviders = [
         host: 'localhost',
         port: 5432,
         username: 'postgres',
-        password: '12345',
+        password: 'joss21072004',
         database: 'dreamCatcher',
         entities: [UserEntity, RoleEntity, StoryEntity, StateRevisorEntity, ResolverEntity, ResolverEntity, PostEntity, LikeEntity, CountryEntity, CommentEntity , FriendshipEntity],
         synchronize: true,

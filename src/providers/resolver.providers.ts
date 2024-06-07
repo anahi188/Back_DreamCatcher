@@ -1,7 +1,7 @@
 import { ResolverEntity } from 'src/entites/resolver.entity';
 import { DataSource } from 'typeorm';
 
-export const roleProviders = [
+export const resolverProviders = [
   {
     provide: 'RESOLVER_REPOSITORY',
     useFactory: (dataSource: DataSource) => dataSource.getRepository(ResolverEntity),
