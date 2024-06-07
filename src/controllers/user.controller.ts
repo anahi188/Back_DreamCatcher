@@ -22,7 +22,7 @@ export class UserController {
 
   @Post()
   create(@Body() payload:any){
-    const response = await this.userService.
+    const response = await this.userService.actualizarUaser(payload)
     return payload;
   }
 }
