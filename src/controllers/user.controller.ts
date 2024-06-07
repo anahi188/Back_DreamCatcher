@@ -20,9 +20,9 @@ export class UserController {
     
   }
 
-  @Post()
-  create(@Body() payload:any){
-    const response = await this.userService.actualizarUaser(payload)
-    return payload;
+  @Put(':id')
+  update(@Param('iduser') id:number, @Body() payload:any){
+    const response = await this.userService.findOneUser(id);
+    return response;
   }
 }
