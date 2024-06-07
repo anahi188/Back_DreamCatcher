@@ -20,12 +20,11 @@ export class UserController {
     
   }
 
-  @Get(':filter')
+  @Get('filter')
   findOneUser(
-    @Param('id') id:number,
-     @Param('name') id:number
+    @Query() queryParams : any,
     ){
-    const response = await this.userService.filter(id,name);
+    const response = await this.userService.filter(queryParams);
     return respuesta; 
     
   }
