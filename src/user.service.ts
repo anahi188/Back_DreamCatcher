@@ -12,6 +12,13 @@ constructor(@Inyect('USER_REPOSITORY') private redonly userRepository :Repositor
     return user
   }
 
+  async filter(id,name){
+    const user = await this.userRepository.findOne({
+      where: {id:id}, 
+             {name: name})
+    return user
+  }
+
   
   createUaser(payload : any){
     const newUser = this userRepository.create();
@@ -20,11 +27,14 @@ constructor(@Inyect('USER_REPOSITORY') private redonly userRepository :Repositor
     this.userRepository.save(newUser);
   }
 
-   actualizarUaser(payload : any){
-    const editUser = this userRepository.();
-    newUser.firtName = payload.firtName;
+   async actualizarUaser(id : any,payload : any){
+    const editUser = this.userRepository.findOne(
+      {where : {id : id})
+    );
+     
+    editUser.firtName = payload.firtName;
 
-    this.userRepository.save(newUser);
+    this.userRepository.save(editUser);
   }
 
   //el paginador se hace aqui 
