@@ -12,10 +12,9 @@ constructor(@Inyect('USER_REPOSITORY') private redonly userRepository :Repositor
     return user
   }
 
-  async filter(id,name){
-    const user = await this.userRepository.findOne({
-      where: {id:id}, 
-             {name: name})
+  async filter(queryParams){
+    const user = await this.userRepository.find({
+      where: {firsName: queryParams.firstName})
     return user
   }
 
