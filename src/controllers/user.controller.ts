@@ -22,7 +22,7 @@ export class UserController {
 
   @Put(':id')
   update(@Param('iduser') id:number, @Body() payload:any){
-    const response = await this.userService.findOneUser(id);
+    const response = await this.userService.actualizarUaser(id,playload);
     return response;
   }
 }
