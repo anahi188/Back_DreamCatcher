@@ -11,16 +11,18 @@ export class UserController {
     return respuesta; 
   }
 
-  @Get(':id/:name/:lastname/:email/:password')
+  @Get(':id')
   findOneUser(
-    @Param('id') id:number, 
-    @Param('name') name :string, 
-    @Param('lastname') lastname :string, 
-    @Param('email') email :string, 
-    @Param('password') password :string, 
+    @Param('id') id:number
     ){
-    const response = await this.userService.findOneUser(id,name,lastname,email,password);
+    const response = await this.userService.findOneUser(id);
     return respuesta; 
     
+  }
+
+  @Update()
+  editarUsuario() {
+    
+  
   }
 }
