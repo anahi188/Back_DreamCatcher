@@ -20,5 +20,12 @@ constructor(@Inyect('USER_REPOSITORY') private redonly userRepository :Repositor
     this.userRepository.save(newUser);
   }
 
+   actualizarUaser(payload : any){
+    const editUser = this userRepository.();
+    newUser.firtName = payload.firtName;
+
+    this.userRepository.save(newUser);
+  }
+
   //el paginador se hace aqui 
 }
