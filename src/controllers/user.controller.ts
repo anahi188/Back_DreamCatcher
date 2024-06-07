@@ -20,7 +20,7 @@ export class UserController {
     
   }
 
-  @Get(':id / :name')
+  @Get(':filter')
   findOneUser(
     @Param('id') id:number,
      @Param('name') id:number
