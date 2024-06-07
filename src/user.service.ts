@@ -37,5 +37,9 @@ constructor(@Inyect('USER_REPOSITORY') private redonly userRepository :Repositor
     this.userRepository.save(editUser);
   }
 
+     async deleteUaser(id : any){
+    const editUser = this.userRepository.delete(id);
+  }
+
   //el paginador se hace aqui 
 }
