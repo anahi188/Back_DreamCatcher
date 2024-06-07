@@ -35,4 +35,12 @@ export class UserController {
     const response = await this.userService.actualizarUaser(id,playload);
     return response;
   }
+
+  @Delete(':id')
+  delete(
+    @Param('id') id: number
+    ){
+     const response = await this.userService.deleteUaser(id);
+    return 'Eliminado';
+  }
 }
