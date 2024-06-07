@@ -20,10 +20,9 @@ export class UserController {
     
   }
 
-  @Update()
-  editarUsuario() {
-    
-    
-  
+  @Post()
+  create(@Body() payload:any){
+    const response = await this.userService.
+    return payload;
   }
 }
