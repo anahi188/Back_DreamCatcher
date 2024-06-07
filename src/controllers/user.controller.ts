@@ -25,7 +25,7 @@ export class UserController {
     @Param('id') id:number,
      @Param('name') id:number
     ){
-    const response = await this.userService.findOneUser(id,name);
+    const response = await this.userService.filter(id,name);
     return respuesta; 
     
   }
