@@ -20,6 +20,16 @@ export class UserController {
     
   }
 
+  @Get(':id / :name')
+  findOneUser(
+    @Param('id') id:number,
+     @Param('name') id:number
+    ){
+    const response = await this.userService.findOneUser(id,name);
+    return respuesta; 
+    
+  }
+
   @Put(':id')
   update(@Param('iduser') id:number, @Body() payload:any){
     const response = await this.userService.actualizarUaser(id,playload);
