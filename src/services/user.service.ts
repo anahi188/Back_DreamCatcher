@@ -22,7 +22,7 @@ export class UserService{
         const user = this.userRepository.create()
         user.firstname = payload.firstname;
         user.lastname = payload.lastname;
-        user.email = payload.emaile;
+        user.email = payload.email;
         user.city = payload.city;
         user.description = payload.description;
         user.password = payload.password;
@@ -33,7 +33,7 @@ export class UserService{
         const user = await this.userRepository.findOne({where : {id}})
         user.firstname = payload.firstname;
         user.lastname = payload.lastname;
-        user.email = payload.emaile;
+        user.email = payload.email;
         user.city = payload.city;
         user.description = payload.description;
         user.password = payload.password;
