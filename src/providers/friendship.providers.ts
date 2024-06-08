@@ -1,7 +1,7 @@
 import { FriendshipEntity } from 'src/entites/friendship.entity';
 import { DataSource } from 'typeorm';
 
-export const roleProviders = [
+export const friendshipProviders = [
   {
     provide: 'FRIENDSHIP_REPOSITORY',
     useFactory: (dataSource: DataSource) => dataSource.getRepository(FriendshipEntity),
