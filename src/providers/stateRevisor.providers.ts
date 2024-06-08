@@ -1,7 +1,7 @@
 import { StateRevisorEntity } from 'src/entites/stateRevisor.entity';
 import { DataSource } from 'typeorm';
 
-export const roleProviders = [
+export const stateRevisorProviders = [
   {
     provide: 'STATEREVISOR_REPOSITORY',
     useFactory: (dataSource: DataSource) => dataSource.getRepository(StateRevisorEntity),

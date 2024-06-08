@@ -16,3 +16,4 @@ export class StoryEntity {
     @OneToMany(() => LikeEntity, like => like.story)
     likes: LikeEntity[];
 }
+
