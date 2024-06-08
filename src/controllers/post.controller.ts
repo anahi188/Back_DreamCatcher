@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { PostService } from "src/services/post.service";
 
-@Controller()
+@Controller('post')
 export class PostController{
     
     constructor(private readonly postService: PostService){
