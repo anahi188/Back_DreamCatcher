@@ -21,8 +21,6 @@ import { DatabaseModule } from './database/database.module';
   ],
   providers: [
     AppService,
-    ResolverService,
-    StoryService,
     ...resolverProviders,
     ...storyProviders
   ],
