@@ -9,19 +9,19 @@ export class StoryController {
     }
 
     @Get()
-    async findstory(){
+    async findStory(){
         const response = await this.storyService.finAll()
         return response;
     }
 
     @Get(':id')
-    async findOnestory(@Param('id') id : string){
+    async findOneStory(@Param('id') id : string){
       const response = await this.storyService.find(id)
       return response;
     }
 
     @Put(':id')
-    async updatestory(@Param('id') id:string, @Body() payload:any){
+    async updateStory(@Param('id') id:string, @Body() payload:any){
       const response = await this.storyService.update(id, payload)
       return response;
     }
