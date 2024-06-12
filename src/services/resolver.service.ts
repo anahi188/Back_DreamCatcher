@@ -4,8 +4,7 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class ResolverService {
-  constructor(
-    @Inject('RESOLVER_REPOSITORY') private readonly resolverRepository: Repository<ResolverEntity>
+  constructor(@Inject('RESOLVER_REPOSITORY') private readonly resolverRepository: Repository<ResolverEntity>
   ) {}
 
   async finAll() {
@@ -19,9 +18,10 @@ export class ResolverService {
   }
 
   create(payload: any) {
+    console.log("Trae", payload)
     const resolver = this.resolverRepository.create();
     resolver.name = payload.name;
-    resolver.last_name = payload.last_name;
+    resolver.last_name = payload.lastname;
     resolver.email = payload.email;
     resolver.solution = payload.solution;
     resolver.date = payload.date;
