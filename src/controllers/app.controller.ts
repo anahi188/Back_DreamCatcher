@@ -1,12 +1,39 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { AppService } from '../app.service';
 
-@Controller()
+@Controller('users')
 export class AppController {
-  constructor(private readonly appService: AppService) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  findUsers(
+    @Query() queryParams: any
+  ) {
+    return queryParams;
   }
+
+  @Get(':id/:state')
+  findOneUser(
+    @Param('id') id: number,
+    @Param('state') state: boolean
+  ) {
+    return state;
+  }
+
+  @Post()
+  create(@Body() payload: any) {
+    return payload;
+  }
+
+  @Put(':id')
+  update(@Param('id') id: number, @Body() payload: any) {
+    return '';
+  }
+
+  @Delete(':id')
+  delete(
+    @Param('id') id: number
+  ) {
+    return 'Eliminadoñ';
+  }
+
 }
