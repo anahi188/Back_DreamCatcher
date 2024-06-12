@@ -23,7 +23,6 @@ export class UserService{
         user.firstname = payload.firstname;
         user.lastname = payload.lastname;
         user.email = payload.email;
-        user.city = payload.city;
         user.description = payload.description;
         user.password = payload.password;
 
@@ -34,7 +33,6 @@ export class UserService{
         user.firstname = payload.firstname;
         user.lastname = payload.lastname;
         user.email = payload.email;
-        user.city = payload.city;
         user.description = payload.description;
         user.password = payload.password;
 

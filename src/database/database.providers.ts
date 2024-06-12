@@ -13,6 +13,7 @@ export const databaseProviders = [
 
         password: '12345',
 
+
         database: 'dreamCatcher',
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
 

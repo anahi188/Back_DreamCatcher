@@ -12,17 +12,13 @@ import { userProviders } from './providers/user.providers';
 import { postProviders } from './providers/post.providers';
 import { commentProviders } from './providers/comment.providers';
 
-
-
 @Module({
-  imports: [
-    DatabaseModule
-  ],
+  imports: [DatabaseModule],
   controllers: [
     AppController,
     UserController,
     PostController,
-    CommentController
+    CommentController,
   ],
   providers: [
     AppService,
@@ -31,7 +27,7 @@ import { commentProviders } from './providers/comment.providers';
     CommentService,
     ...userProviders,
     ...postProviders,
-    ...commentProviders
+    ...commentProviders,
   ],
 })
 export class AppModule { }
