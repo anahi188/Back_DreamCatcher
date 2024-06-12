@@ -1,28 +1,33 @@
 import { Module } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AppController } from './controllers/app.controller';
-import { ResolverController } from './controllers/resolver.controller';
-import { StoryController } from './controllers/story.controller';
-import { StoryService } from './services/story.service';
-import { ResolverService } from './services/resolver.service';
-import { storyProviders } from './providers/story.providers';
-import { resolverProviders } from './providers/resolver.providers';
-import { DatabaseModule } from './database/database.module';
 
+import { UserController } from './controllers/user.controller';
+import { PostController } from './controllers/post.controller';
+import { CommentController } from './controllers/comment.controller';
+import { UserService } from './services/user.service';
+import { PostService } from './services/post.service';
+import { CommentService } from './services/comment.service';
+import { userProviders } from './providers/user.providers';
+import { postProviders } from './providers/post.providers';
+import { commentProviders } from './providers/comment.providers';
 
 @Module({
-  imports: [
-    DatabaseModule
-  ],
+  imports: [DatabaseModule],
   controllers: [
     AppController,
-    ResolverController,
-    StoryController
+    UserController,
+    PostController,
+    CommentController,
   ],
   providers: [
     AppService,
-    ...resolverProviders,
-    ...storyProviders
+    UserService,
+    PostService,
+    CommentService,
+    ...userProviders,
+    ...postProviders,
+    ...commentProviders,
   ],
 })
 export class AppModule { }

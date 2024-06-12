@@ -22,9 +22,6 @@ export class UserEntity {
   @Column({ type: 'varchar', unique: true, comment: 'Correo electrónico del usuario' })
   email: string;
 
-  @Column({ type: 'varchar', length: 40, comment: 'Ciudad del usuario' })
-  city: string;
-
   @Column({ type: 'varchar', comment: 'Contraseña del usuario' })
   password: string;
 
