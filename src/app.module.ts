@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { AppService } from './app.service';
-import { AppController } from './controllers/app.controller';
 
 import { UserController } from './controllers/user.controller';
 import { PostController } from './controllers/post.controller';
@@ -11,19 +10,23 @@ import { CommentService } from './services/comment.service';
 import { userProviders } from './providers/user.providers';
 import { postProviders } from './providers/post.providers';
 import { commentProviders } from './providers/comment.providers';
+import { DatabaseModule } from './database/database.module';
+import { AuthController } from './auth/auth.controller';
+import { AuthService } from './auth/auth.service';
 
 @Module({
   imports: [DatabaseModule],
   controllers: [
-    AppController,
     UserController,
     PostController,
     CommentController,
+    AuthController
   ],
   providers: [
     AppService,
     UserService,
     PostService,
+    AuthService,
     CommentService,
     ...userProviders,
     ...postProviders,
