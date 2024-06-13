@@ -10,8 +10,13 @@ export class ResolverService {
 
   async finAll() {
     const resolver = await this.resolverRepository.find();
+    //PARA EL PAGINACION
+    //take: 2, paginacion numero
+    //skip: 1,  - devuleve el regitro que continua y no el 1 si no el 2 - paginado de dos registros
     return resolver;
   }
+
+  
 
   async find(id: string) {
     const resolver = await this.resolverRepository.findOne({ where: { id } });
