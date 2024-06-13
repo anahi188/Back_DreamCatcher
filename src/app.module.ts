@@ -39,6 +39,6 @@ import { jwtConstants } from './auth/constants/jwt.constant';
     ...userProviders,
     ...postProviders,
     ...commentProviders,
-  ],
+  ]
 })
 export class AppModule {}
