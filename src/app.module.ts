@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { AppService } from './app.service';
-
 import { UserController } from './controllers/user.controller';
 import { PostController } from './controllers/post.controller';
 import { CommentController } from './controllers/comment.controller';
@@ -13,14 +12,23 @@ import { commentProviders } from './providers/comment.providers';
 import { DatabaseModule } from './database/database.module';
 import { AuthController } from './auth/auth.controller';
 import { AuthService } from './auth/auth.service';
+import { JwtModule } from '@nestjs/jwt';
+import { jwtConstants } from './auth/constants/jwt.constant';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [
+    DatabaseModule,
+    JwtModule.register({
+      global: true,
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '1d' },
+    }),
+  ],
   controllers: [
     UserController,
     PostController,
     CommentController,
-    AuthController
+    AuthController,
   ],
   providers: [
     AppService,
@@ -33,4 +41,4 @@ import { AuthService } from './auth/auth.service';
     ...commentProviders,
   ],
 })
-export class AppModule { }
+export class AppModule {}
