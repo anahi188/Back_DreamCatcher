@@ -10,9 +10,19 @@ export class ResolverService {
 
   async finAll() {
     const resolver = await this.resolverRepository.find();
-    //PARA EL PAGINACION
-    //take: 2, paginacion numero
-    //skip: 1,  - devuleve el regitro que continua y no el 1 si no el 2 - paginado de dos registros
+    //2 - TRAER DATOS RELACIONALES
+    //relations: {profile: true, roles: true} - nombre de la relacion de entity
+    //where:{firstName: 'Luis'} - aberiguar mas 
+    //where:{firstName: ILike ('L%'), lastName: "%L%"} - Para consultar registro que inicien con L 
+    //where:[
+    //{firstName: ILike ('L%'), lastName: "%L%"} 
+    //] - VER LA DOCUMENTACION TYPEORM
+
+    
+    //1 - PARA EL PAGINACION
+    //async finAll(Param: any)
+    //take: params.limit, paginacion numero
+    //skip: params.limit =  (param.page -1),  - devuleve el regitro que continua y no el 1 si no el 2 - paginado de dos registros
     return resolver;
   }
 
