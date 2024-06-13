@@ -1,36 +1,18 @@
 import { Module } from '@nestjs/common';
 import { AppService } from './app.service';
 
-import { UserController } from './controllers/user.controller';
-import { PostController } from './controllers/post.controller';
-import { CommentController } from './controllers/comment.controller';
-import { UserService } from './services/user.service';
-import { PostService } from './services/post.service';
-import { CommentService } from './services/comment.service';
-import { userProviders } from './providers/user.providers';
+import { AppController } from './controllers/app.controller';
+import { StateRevisorController } from './controllers/state-revisor/state-revisor.controller';
+import { ExplorerService } from './services/explorer/explorer.service';
+import { RevisorService } from './services/revisor/revisor.service';
 import { postProviders } from './providers/post.providers';
-import { commentProviders } from './providers/comment.providers';
-import { DatabaseModule } from './database/database.module';
-import { AuthController } from './auth/auth.controller';
-import { AuthService } from './auth/auth.service';
+import { stateRevisorProviders } from './providers/stateRevisor.providers';
 
 @Module({
   imports: [DatabaseModule],
-  controllers: [
-    UserController,
-    PostController,
-    CommentController,
-    AuthController
-  ],
-  providers: [
-    AppService,
-    UserService,
-    PostService,
-    AuthService,
-    CommentService,
-    ...userProviders,
-    ...postProviders,
-    ...commentProviders,
-  ],
+
+  controllers: [AppController, StateRevisorController,],
+  providers: [AppService, ExplorerService, RevisorService,  ...postProviders,  ...stateRevisorProviders, ],
+
 })
 export class AppModule { }
