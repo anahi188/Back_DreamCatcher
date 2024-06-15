@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppService } from './app.service';
+
+
 import { UserController } from './controllers/user.controller';
 import { PostController } from './controllers/post.controller';
 import { CommentController } from './controllers/comment.controller';
@@ -24,11 +26,14 @@ import { jwtConstants } from './auth/constants/jwt.constant';
       signOptions: { expiresIn: '1d' },
     }),
   ],
+
   controllers: [
     UserController,
     PostController,
     CommentController,
+
     AuthController,
+
   ],
   providers: [
     AppService,
@@ -39,6 +44,8 @@ import { jwtConstants } from './auth/constants/jwt.constant';
     ...userProviders,
     ...postProviders,
     ...commentProviders,
+
   ]
+
 })
 export class AppModule {}
