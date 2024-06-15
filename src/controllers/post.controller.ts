@@ -12,6 +12,9 @@ export class PostController{
     @Get()
     async findpost(){
       const response = await this.postService.finAll()
+      order: {
+        id: 'asc';
+      }
       return response;
     }
     
