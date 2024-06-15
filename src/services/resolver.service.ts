@@ -13,8 +13,6 @@ export class ResolverService {
     return resolver;
   }
 
-
-
   async find(id: string) {
     const resolver = await this.resolverRepository.findOne({ where: { id } });
     return resolver;
@@ -33,7 +31,6 @@ export class ResolverService {
     resolver.status = payload.status;
     resolver.responsible = payload.responsible;
 
-
     return this.resolverRepository.save(resolver);
   }
 
@@ -48,7 +45,7 @@ export class ResolverService {
     resolver.suspended_account = payload.suspended_account;
     resolver.status = payload.status;
     resolver.responsible = payload.responsible;
-
+    
     return this.resolverRepository.save(resolver);
   }
 }
