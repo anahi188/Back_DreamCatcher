@@ -1,4 +1,3 @@
-
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, ManyToMany, JoinTable } from 'typeorm';
 import { RoleEntity } from './role.entity';
 import { StoryEntity } from './story.entity';
@@ -22,9 +21,6 @@ export class UserEntity {
 
   @Column({ type: 'varchar', unique: true, comment: 'Correo electrónico del usuario' })
   email: string;
-
-  @Column({ type: 'varchar', length: 40, comment: 'Ciudad del usuario' })
-  city: string;
 
   @Column({ type: 'varchar', comment: 'Contraseña del usuario' })
   password: string;
@@ -64,4 +60,5 @@ export class UserEntity {
   })
   friends: UserEntity[];
 }
+
 
