@@ -17,12 +17,27 @@ export class UserService{
         const user = await this.userRepository.findOne({where : {id}});
         return user;
     }
+    async findOneByEmail(email: string): Promise<UserEntity> {
+        return this.userRepository.findOne({
+          where: { email },
+          relations: ['role'], // Asegúrate de incluir la relación con el role
+        });
+      }
 
+    async findByEmailWithPassword(email: string): Promise<UserEntity> {
+        return this.userRepository.findOne({
+          where: { email },
+          select: ['id', 'email', 'password','role'], 
+          relations: ['role'], 
+        });
+      }
+    
     create(payload : any ){
         const user = this.userRepository.create()
         user.firstname = payload.firstname;
         user.lastname = payload.lastname;
         user.email = payload.email;
+        user.city = payload.city;
         user.description = payload.description;
         user.password = payload.password;
 
@@ -33,6 +48,7 @@ export class UserService{
         user.firstname = payload.firstname;
         user.lastname = payload.lastname;
         user.email = payload.email;
+        user.city = payload.city;
         user.description = payload.description;
         user.password = payload.password;
 

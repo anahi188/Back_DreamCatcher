@@ -55,10 +55,8 @@ export class UserEntity {
   @ManyToMany(() => UserEntity, user => user.friends)
   @JoinTable({
     name: 'friendships',
-    joinColumn: { name: 'user_id', referencedColumnName: 'id' }, // Cambiar el nombre de la columna
+    joinColumn: { name: 'user_id', referencedColumnName: 'id' },
     inverseJoinColumn: { name: 'friend_id', referencedColumnName: 'id' }
   })
   friends: UserEntity[];
 }
-
-
