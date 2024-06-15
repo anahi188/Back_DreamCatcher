@@ -10,7 +10,6 @@ export const databaseProviders = [
         port: 5432,
         username: 'postgres',
         password: 'joss21072004',
-
         database: 'dreamCatcher',
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
 
