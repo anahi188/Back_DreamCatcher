@@ -12,10 +12,16 @@ import { userProviders } from './providers/user.providers';
 import { postProviders } from './providers/post.providers';
 import { commentProviders } from './providers/comment.providers';
 import { DatabaseModule } from './database/database.module';
+
+import { resolverProviders } from './providers/resolver.providers';
+import { ResolverController } from './controllers/resolver.controller';
+import { ResolverService } from './services/resolver.service';
+
 import { AuthController } from './auth/auth.controller';
 import { AuthService } from './auth/auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './auth/constants/jwt.constant';
+
 
 @Module({
   imports: [
@@ -32,6 +38,9 @@ import { jwtConstants } from './auth/constants/jwt.constant';
     PostController,
     CommentController,
 
+    ResolverController
+
+
     AuthController,
 
   ],
@@ -41,11 +50,12 @@ import { jwtConstants } from './auth/constants/jwt.constant';
     PostService,
     AuthService,
     CommentService,
+    ResolverService,
     ...userProviders,
     ...postProviders,
     ...commentProviders,
-
-  ]
+    ...resolverProviders
+  ],
 
 })
 export class AppModule {}
