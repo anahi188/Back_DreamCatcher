@@ -14,6 +14,12 @@ import { AuthController } from './auth/auth.controller';
 import { AuthService } from './auth/auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './auth/constants/jwt.constant';
+import { countryProviders } from './providers/country.providers';
+import { CountryController } from './controllers/country.controller';
+import { CountryService } from './services/country/country.service';
+import { RolService } from './services/rol/rol.service';
+import { RolController } from './controllers/rol.controller';
+import { roleProviders } from './providers/role.providers';
 
 @Module({
   imports: [
@@ -29,16 +35,22 @@ import { jwtConstants } from './auth/constants/jwt.constant';
     PostController,
     CommentController,
     AuthController,
+    CountryController,
+    RolController
   ],
   providers: [
     AppService,
     UserService,
     PostService,
     AuthService,
+    CountryService,
     CommentService,
     ...userProviders,
     ...postProviders,
     ...commentProviders,
+    ...countryProviders,
+    ...roleProviders,
+    RolService,
   ]
 })
 export class AppModule {}
