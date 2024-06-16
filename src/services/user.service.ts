@@ -46,6 +46,7 @@ export class UserService {
       payload.country = await this.countryRepository.findOne({ where: { id: payload.countryId } });
     }
 
+
     if (payload.rolId) {
       payload.role = await this.roleRepository.findOne({ where: { id: payload.rolId } });
     }

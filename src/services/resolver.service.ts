@@ -1,12 +1,12 @@
-import { Inject, Injectable } from '@nestjs/common';
+
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { ResolverEntity } from 'src/entites/resolver.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
 export class ResolverService {
-  constructor(
-    @Inject('RESOLVER_REPOSITORY') private readonly resolverRepository: Repository<ResolverEntity>
-  ) {}
+  constructor(@Inject('RESOLVER_REPOSITORY') private readonly resolverRepository: Repository<ResolverEntity>
+  ) { }
 
   async finAll() {
     const resolver = await this.resolverRepository.find();
@@ -19,14 +19,17 @@ export class ResolverService {
   }
 
   create(payload: any) {
+    console.log("Trae", payload)
     const resolver = this.resolverRepository.create();
     resolver.name = payload.name;
-    resolver.last_name = payload.last_name;
+    resolver.last_name = payload.lastname;
     resolver.email = payload.email;
     resolver.solution = payload.solution;
     resolver.date = payload.date;
     resolver.complaint_number = payload.complaint_number;
     resolver.suspended_account = payload.suspended_account;
+    resolver.status = payload.status;
+    resolver.responsible = payload.responsible;
 
     return this.resolverRepository.save(resolver);
   }
@@ -40,7 +43,9 @@ export class ResolverService {
     resolver.date = payload.date;
     resolver.complaint_number = payload.complaint_number;
     resolver.suspended_account = payload.suspended_account;
-
+    resolver.status = payload.status;
+    resolver.responsible = payload.responsible;
+    
     return this.resolverRepository.save(resolver);
   }
 }
