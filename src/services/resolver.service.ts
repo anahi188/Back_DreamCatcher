@@ -35,16 +35,10 @@ export class ResolverService {
   }
 
   async update(id: string, payload: any) {
+    console.log("Actualiza", payload)
     const resolver = await this.resolverRepository.findOne({ where: { id } });
-    resolver.name = payload.name;
-    resolver.last_name = payload.last_name;
-    resolver.email = payload.email;
-    resolver.solution = payload.solution;
-    resolver.date = payload.date;
-    resolver.complaint_number = payload.complaint_number;
     resolver.suspended_account = payload.suspended_account;
     resolver.status = payload.status;
-    resolver.responsible = payload.responsible;
     
     return this.resolverRepository.save(resolver);
   }

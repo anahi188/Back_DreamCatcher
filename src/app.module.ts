@@ -17,10 +17,10 @@ import { resolverProviders } from './providers/resolver.providers';
 import { ResolverController } from './controllers/resolver.controller';
 import { ResolverService } from './services/resolver.service';
 
-import { AuthController } from './auth/auth.controller';
 import { AuthService } from './auth/auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './auth/constants/jwt.constant';
+import { AuthController } from './auth/auth.controller';
 
 
 @Module({
@@ -37,10 +37,7 @@ import { jwtConstants } from './auth/constants/jwt.constant';
     UserController,
     PostController,
     CommentController,
-
-    ResolverController
-
-
+    ResolverController,
     AuthController,
 
   ],

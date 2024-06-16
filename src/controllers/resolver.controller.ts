@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { ResolverService } from 'src/services/resolver.service';
 
 @Controller('resolvers')
@@ -22,4 +22,11 @@ export class ResolverController {
     const response = await this.resolverService.create(payload);
     return response;
   }
+
+  @Put(':id')
+  async updateResolver(@Param('id') id:string, @Body() payload:any){
+    const response = await this.resolverService.update(id, payload)
+    return response;
+  }
+
 }
