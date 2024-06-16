@@ -17,7 +17,7 @@ export class RevisorService {
           const newStateRevisor =this.revisorRepository.create();
          newStateRevisor.name_offender = payload.infractor;
           newStateRevisor.problem = payload.problem;
-          newStateRevisor.problem_date = payload.complaint_date;
+          newStateRevisor.problem_date = payload. date_complaint;
           newStateRevisor.problem_hour = payload.time;
           newStateRevisor.severity= payload.severity;
           
