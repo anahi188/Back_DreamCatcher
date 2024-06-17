@@ -27,6 +27,9 @@ import { CountryService } from './services/country/country.service';
 import { RolService } from './services/rol/rol.service';
 import { RolController } from './controllers/rol.controller';
 import { roleProviders } from './providers/role.providers';
+import { storyProviders } from './providers/story.providers';
+import { StoryService } from './services/story.service';
+import { StoryController } from './controllers/story.controller';
 
 
 @Module({
@@ -43,13 +46,11 @@ import { roleProviders } from './providers/role.providers';
     UserController,
     PostController,
     CommentController,
-
     ResolverController,
-
-
     AuthController,
     CountryController,
-    RolController
+    RolController,
+    StoryController
 
   ],
   providers: [
@@ -66,7 +67,9 @@ import { roleProviders } from './providers/role.providers';
     ...countryProviders,
     ...roleProviders,
     ...resolverProviders,
+    ...storyProviders,
     RolService,
+    StoryService
   ]
 
     
