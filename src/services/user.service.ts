@@ -2,7 +2,6 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CountryEntity } from 'src/entites/country.entity';
 import { RoleEntity } from 'src/entites/role.entity';
 import { UserEntity } from 'src/entites/user.entity';
-
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -45,7 +44,6 @@ export class UserService {
     if (payload.countryId) {
       payload.country = await this.countryRepository.findOne({ where: { id: payload.countryId } });
     }
-
 
     if (payload.rolId) {
       payload.role = await this.roleRepository.findOne({ where: { id: payload.rolId } });
