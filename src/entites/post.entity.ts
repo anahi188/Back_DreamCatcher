@@ -16,6 +16,9 @@ export class PostEntity {
     @Column({ type: 'varchar', comment: 'Etiqueta de la publicación' })
     tag: string;
 
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', comment: 'Fecha de creación de la publicacion' })
+    created_at: Date;
+
     @ManyToOne(() => UserEntity, user => user.posts)
     user: UserEntity;
 
