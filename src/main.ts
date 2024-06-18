@@ -9,6 +9,9 @@ async function bootstrap() {
 
   // Configuración para servir archivos estáticos desde la carpeta 'uploads/stories'
   app.use('/uploads/stories', express.static(join(__dirname, '..', 'uploads', 'stories')));
+  app.use('/uploads/posts', express.static(join(__dirname, '..', 'uploads', 'posts')));
+  app.use('/uploads', express.static(join(__dirname, '..', 'uploads')));
+
 
   app.useGlobalPipes(
     new ValidationPipe({

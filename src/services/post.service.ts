@@ -1,45 +1,40 @@
-import { Inject, Injectable } from "@nestjs/common";
-import { PostEntity } from "src/entites/post.entity";
-import { Repository } from "typeorm";
+import { Inject, Injectable } from '@nestjs/common';
+import { CreatePostDto } from 'src/auth/dto/post.dto';
+import { PostEntity } from 'src/entites/post.entity';
+import { UserEntity } from 'src/entites/user.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
-export class PostService{
-    constructor(@Inject('POST_REPOSITORY') private readonly postRepository: Repository<PostEntity>){
+export class PostService {
+  constructor(
+    @Inject('USER_REPOSITORY')
+    private readonly userRepository: Repository<UserEntity>,
+    @Inject('POST_REPOSITORY')
+    private readonly postRepository: Repository<PostEntity>,
+  ) {}
 
+  async finAll() {
+    const posts = await this.postRepository.find({ relations: ['user'] }); // Incluir relación con usuario
+    return posts;
+  }
+
+  async create(createPostDto: CreatePostDto, imageFilename: string): Promise<PostEntity> {
+    const { text, tag, userId } = createPostDto;
+
+    const user = await this.userRepository.findOne({ where: { id: userId } });
+
+    if (!user) {
+      throw new Error(`User with ID ${userId} not found`);
     }
 
-    async finAll(){
-        const posts = await this.postRepository.find();
-        return posts;
-    }
+    const newPost = new PostEntity();
+    newPost.text = text;
+    newPost.tag = tag;
+    newPost.image = imageFilename;
+    newPost.user = user;
 
-    async finAOne(id: string){
-        const post = await this.postRepository.findOne({where : {id}});
-        return post;
-    }
+    const savedPost = await this.postRepository.save(newPost);
 
-    create(payload : any ){
-        const post = this.postRepository.create()
-        post.text = payload.text;
-        post.tag = payload.tag;
-        post.image = payload.image;
-
-        return this.postRepository.save(post);
-    }
-    async update(id: string, payload : any ){
-        const post = await this.postRepository.findOne({where : {id}})
-        post.text = payload.text;
-        post.tag = payload.tag;
-        post.image = payload.image;
-
-        return this.postRepository.save(post)
-        
-    }
-    async delete(id : string){
-        const post = await this.postRepository.findOne({where : {id}})
-
-        return this.postRepository.delete(id)
-        
-    }
-
+    return savedPost;
+  }
 }

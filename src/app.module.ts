@@ -50,7 +50,8 @@ import { StoryController } from './controllers/story.controller';
     AuthController,
     CountryController,
     RolController,
-    StoryController
+    StoryController,
+    PostController
 
   ],
   providers: [
@@ -68,8 +69,10 @@ import { StoryController } from './controllers/story.controller';
     ...roleProviders,
     ...resolverProviders,
     ...storyProviders,
+    ...postProviders,
     RolService,
-    StoryService
+    StoryService,
+    PostService
   ]
 
     
