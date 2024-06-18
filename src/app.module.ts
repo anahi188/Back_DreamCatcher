@@ -53,7 +53,6 @@ import { StoryController } from './controllers/story.controller';
     StoryController,
     PostController,
     CountryController
-
   ],
   providers: [
     AppService,
