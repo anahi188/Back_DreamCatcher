@@ -65,6 +65,7 @@ export class UserService {
         payload.role = await this.roleRepository.findOne({ where: { id: payload.roleId } });
       }
 
+
       Object.assign(user, payload);
       return await this.userRepository.save(user);
     }
