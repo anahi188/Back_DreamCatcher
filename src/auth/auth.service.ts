@@ -6,7 +6,7 @@ import {
 import { RegisterDto } from './dto/register.dto';
 import * as bcryptjs from 'bcryptjs';
 import { LoginDto } from './dto/login.dto';
-import { UserService } from '../services/user.service';
+import { UserService } from '../services/user.service'; // Unificado el uso de UserService para crear usuarios
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
@@ -16,8 +16,9 @@ export class AuthService {
     private jwtService: JwtService
   ) {}
 
-  async register({ firstname, lastname, email, password, image, description, countryId, roleId }: RegisterDto) {
-    const user = await this.userService.findOneByEmail(email);
+  // Registro de usuarios usando UserService
+  async register({firstname, lastname, email, password, image, description, countryId, roleId }: RegisterDto) {
+    const user = await this.userService.findOneById(email);
 
     if (user) {
       throw new BadRequestException('User already exists');
@@ -55,13 +56,14 @@ export class AuthService {
       throw new UnauthorizedException('User role not found');
     }
 
-    const payload = { email: user.email, role: user.role.name }; // Asumiendo que `role` tiene un campo `name`
+    const payload = { email: user.email, role: user.role.name }; 
     const token = await this.jwtService.signAsync(payload);
 
     return {
       token,
       email,
-      role: user.role.name, // Retorna el nombre del role
+      role: user.role.name,
+      userId: user.id,
     };
   }
 
