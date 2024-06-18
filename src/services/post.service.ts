@@ -14,7 +14,10 @@ export class PostService {
   ) {}
 
   async finAll() {
-    const posts = await this.postRepository.find({ relations: ['user'] }); // Incluir relación con usuario
+    const posts = await this.postRepository.find({
+      relations: ['user'],
+      order: { created_at: 'DESC' },
+    }); 
     return posts;
   }
 

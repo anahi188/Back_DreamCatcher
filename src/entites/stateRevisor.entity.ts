@@ -12,14 +12,14 @@ export class StateRevisorEntity {
     @Column({ type: 'varchar', comment: 'Problema encontrado' })
     problem: string;
 
-    @Column({ type: 'date', comment: 'Fecha del problema' })
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', comment: 'Fecha de creación de la historia' })
     problem_date: Date;
 
     @Column({ type: 'time', comment: 'Hora del problema' })
     problem_hour: string;
 
-    @Column({ type: 'boolean', comment: 'Severidad del problema' })
-    severity: boolean;
+    @Column({ type: 'varchar', comment: 'Severidad del problema' })
+    severity: string;
 
    
     @ManyToOne(() => UserEntity, user => user.stateRevisors)

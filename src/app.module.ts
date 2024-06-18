@@ -30,6 +30,9 @@ import { roleProviders } from './providers/role.providers';
 import { storyProviders } from './providers/story.providers';
 import { StoryService } from './services/story.service';
 import { StoryController } from './controllers/story.controller';
+import { StateRevisorController } from './controllers/state-revisor/state-revisor.controller';
+import { RevisorService } from './services/revisor/revisor.service';
+import { stateRevisorProviders } from './providers/stateRevisor.providers';
 
 
 @Module({
@@ -52,7 +55,8 @@ import { StoryController } from './controllers/story.controller';
     RolController,
     StoryController,
     PostController,
-    CountryController
+    CountryController,
+    StateRevisorController
   ],
   providers: [
     AppService,
@@ -62,6 +66,7 @@ import { StoryController } from './controllers/story.controller';
     CountryService,
     CommentService,
     ResolverService,
+    RevisorService,
     ...userProviders,
     ...postProviders,
     ...commentProviders,
@@ -70,6 +75,7 @@ import { StoryController } from './controllers/story.controller';
     ...resolverProviders,
     ...storyProviders,
     ...postProviders,
+    ...stateRevisorProviders,
     RolService,
     StoryService,
     PostService

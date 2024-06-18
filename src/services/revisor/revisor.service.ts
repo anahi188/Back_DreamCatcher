@@ -14,11 +14,12 @@ export class RevisorService {
           return complaint;
         }
         async createForm(payload: any) {
+          console.log(payload)
           const newStateRevisor =this.revisorRepository.create();
-         newStateRevisor.name_offender = payload.infractor;
+         newStateRevisor.name_offender = payload.name_offender;
           newStateRevisor.problem = payload.problem;
           newStateRevisor.problem_date = payload. date_complaint;
-          newStateRevisor.problem_hour = payload.time;
+          newStateRevisor.problem_hour = payload.problem_hour;
           newStateRevisor.severity= payload.severity;
           
       
