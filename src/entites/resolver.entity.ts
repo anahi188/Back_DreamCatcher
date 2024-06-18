@@ -26,7 +26,13 @@ export class ResolverEntity {
 
     @Column({ type: 'boolean', comment: 'Cuenta suspendida' })
     suspended_account: boolean;
+    
+    @Column({ type: 'varchar', comment: 'Estado de cuenta' })
+    status: string;
 
+    @Column({ type: 'varchar', comment: 'Responsable' })
+    responsible: string;
+    
     @ManyToOne(() => UserEntity, user => user.resolvers)
     user: UserEntity;
 }
