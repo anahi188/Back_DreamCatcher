@@ -28,4 +28,6 @@ export class ResolverController {
     return this.resolverService.update(id, payload);
   }
 
+
+
 }
