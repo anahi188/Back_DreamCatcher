@@ -9,8 +9,8 @@ export class PostService{
     }
 
     async finAll(){
-        const post = await this.postRepository.find();
-        return post;
+        const posts = await this.postRepository.find();
+        return posts;
     }
 
     async finAOne(id: string){

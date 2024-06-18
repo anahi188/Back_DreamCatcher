@@ -8,7 +8,10 @@ export class StoryEntity {
     id: string;
 
     @Column({ type: 'varchar', nullable: true, comment: 'Foto de la historia' })
-    photo: string;
+    image: string;
+
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', comment: 'Fecha de creación de la historia' })
+    created_at: Date;
 
     @ManyToOne(() => UserEntity, user => user.stories)
     user: UserEntity;
@@ -16,4 +19,3 @@ export class StoryEntity {
     @OneToMany(() => LikeEntity, like => like.story)
     likes: LikeEntity[];
 }
-

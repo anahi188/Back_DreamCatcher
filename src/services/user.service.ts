@@ -1,64 +1,83 @@
-import { Inject, Injectable } from "@nestjs/common";
-import { UserEntity } from "src/entites/user.entity";
-import { Repository } from "typeorm";
+import { Inject, Injectable } from '@nestjs/common';
+import { CountryEntity } from 'src/entites/country.entity';
+import { RoleEntity } from 'src/entites/role.entity';
+import { UserEntity } from 'src/entites/user.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
-export class UserService{
-    constructor(@Inject('USER_REPOSITORY') private readonly userRepository: Repository<UserEntity>){
+export class UserService {
+  constructor(
+    @Inject('USER_REPOSITORY')
+    private readonly userRepository: Repository<UserEntity>,
+    @Inject('COUNTRY_REPOSITORY')
+    private readonly countryRepository: Repository<CountryEntity>,
+    @Inject('ROLE_REPOSITORY')
+    private readonly roleRepository: Repository<RoleEntity>,
+  ) {}
 
-    }
+  async findAll() {
+    return await this.userRepository.find({ relations: ['country', 'role'] });
+  }
 
-    async finAll(){
-        const user = await this.userRepository.find();
-        return user;
-    }
+  async findOneById(id: string) {
+    return await this.userRepository.findOne({ where: { id }, relations: ['country', 'role'] });
+  }
 
-    async finAOne(id: string){
-        const user = await this.userRepository.findOne({where : {id}});
-        return user;
-    }
-    async findOneByEmail(email: string): Promise<UserEntity> {
-        return this.userRepository.findOne({
-          where: { email },
-          relations: ['role'], // Asegúrate de incluir la relación con el role
-        });
-      }
+  async findOneByEmail(email: string): Promise<UserEntity> {
+    return await this.userRepository.findOne({
+      where: { email },
+      relations: ['role'],
+    });
+  }
 
-    async findByEmailWithPassword(email: string): Promise<UserEntity> {
-        return this.userRepository.findOne({
-          where: { email },
-          select: ['id', 'email', 'password','role'], 
-          relations: ['role'], 
-        });
-      }
+  async findByEmailWithPassword(email: string): Promise<UserEntity> {
+    return await this.userRepository.findOne({
+      where: { email },
+      select: ['id', 'email', 'password', 'role'],
+      relations: ['role'],
+    });
+  }
+
+  async create(payload: any) {
+    console.log('Payload to create:', payload);
     
-    create(payload : any ){
-        const user = this.userRepository.create()
-        user.firstname = payload.firstname;
-        user.lastname = payload.lastname;
-        user.email = payload.email;
-        //user.city = payload.city;
-        user.description = payload.description;
-        user.password = payload.password;
-
-        return this.userRepository.save(user);
+    if (payload.countryId) {
+      payload.country = await this.countryRepository.findOne({ where: { id: payload.countryId } });
     }
-    async update(id: string, payload : any ){
-        const user = await this.userRepository.findOne({where : {id}})
-        user.firstname = payload.firstname;
-        user.lastname = payload.lastname;
-        user.email = payload.email;
-        //user.city = payload.city;
-        user.description = payload.description;
-        user.password = payload.password;
 
-        return this.userRepository.save(user)
-        
+    if (payload.rolId) {
+      payload.role = await this.roleRepository.findOne({ where: { id: payload.rolId } });
     }
-    async delete(id : string){
-        const user = await this.userRepository.findOne({where : {id}})
 
-        return this.userRepository.delete(id)
-        
+    const user = this.userRepository.create(payload);
+    return await this.userRepository.save(user);
+  }
+
+  async update(id: string, payload: any) {
+    const user = await this.userRepository.findOne({ where: { id } });
+
+    if (user) {
+      if (payload.countryId) {
+        payload.country = await this.countryRepository.findOne({ where: { id: payload.countryId } });
+      }
+
+      if (payload.roleId) {
+        payload.role = await this.roleRepository.findOne({ where: { id: payload.roleId } });
+      }
+
+
+      Object.assign(user, payload);
+      return await this.userRepository.save(user);
     }
+    return null;
+  }
+
+  async delete(id: string) {
+    const user = await this.userRepository.findOne({ where: { id } });
+    if (user) {
+      await this.userRepository.delete(id);
+      return true;
+    }
+    return false;
+  }
 }
