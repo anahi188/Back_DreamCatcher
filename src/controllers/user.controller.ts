@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseInterceptors, UploadedFile, ParseUUIDPipe } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
@@ -25,7 +25,7 @@ export class UserController {
   }
 
   @Get(':id')
-  async findOneUser(@Param('id') id: string) {
+  async findOneUser(@Param('id', new ParseUUIDPipe()) id: string) {
     const user = await this.userService.findOneById(id);
     return user ? {
       id: user.id,
@@ -81,7 +81,7 @@ export class UserController {
       },
     }),
   }))
-  async updateUser(@Param('id') id: string, @UploadedFile() file: Express.Multer.File, @Body() payload: any) {
+  async updateUser(@Param('id', new ParseUUIDPipe()) id: string, @UploadedFile() file: Express.Multer.File, @Body() payload: any) {
     const updatedUser = await this.userService.update(id, {
       ...payload,
       image: file ? file.filename : null,
@@ -91,7 +91,7 @@ export class UserController {
   }
 
   @Delete(':id')
-  async deleteUser(@Param('id') id: string) {
+  async deleteUser(@Param('id', new ParseUUIDPipe()) id: string) {
     const success = await this.userService.delete(id);
     return { success };
   }
