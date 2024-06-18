@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { RevisorService } from 'src/services/revisor/revisor.service';
 
-@Controller('state-revisor')
+@Controller('revisor')
 export class StateRevisorController {
  constructor(private readonly revisorService: RevisorService) {}
  

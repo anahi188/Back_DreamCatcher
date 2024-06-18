@@ -53,8 +53,8 @@ import { AuthController } from './auth/auth.controller';
     CountryController,
     RolController,
     StoryController,
-    PostController
-
+    PostController,
+    CountryController
   ],
   providers: [
     AppService,
