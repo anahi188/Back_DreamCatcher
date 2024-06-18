@@ -51,7 +51,8 @@ import { StoryController } from './controllers/story.controller';
     CountryController,
     RolController,
     StoryController,
-    PostController
+    PostController,
+    CountryController
 
   ],
   providers: [
