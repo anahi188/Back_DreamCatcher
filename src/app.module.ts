@@ -30,6 +30,7 @@ import { roleProviders } from './providers/role.providers';
 import { storyProviders } from './providers/story.providers';
 import { StoryService } from './services/story.service';
 import { StoryController } from './controllers/story.controller';
+import { AuthController } from './auth/auth.controller';
 
 
 
