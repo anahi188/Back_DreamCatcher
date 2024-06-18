@@ -19,7 +19,6 @@ export class ResolverService {
   }
 
   create(payload: any) {
-    console.log("Trae", payload)
     const resolver = this.resolverRepository.create();
     resolver.name = payload.name;
     resolver.last_name = payload.lastname;

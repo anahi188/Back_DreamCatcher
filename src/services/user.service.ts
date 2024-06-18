@@ -39,7 +39,6 @@ export class UserService {
   }
 
   async create(payload: any) {
-    console.log('Payload to create:', payload);
     
     if (payload.countryId) {
       payload.country = await this.countryRepository.findOne({ where: { id: payload.countryId } });

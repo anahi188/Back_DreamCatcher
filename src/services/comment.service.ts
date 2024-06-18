@@ -4,40 +4,40 @@ import { Repository } from "typeorm";
 
 @Injectable()
 export class CommentService{
-    constructor(@Inject('COMMENT_REPOSITORY') private readonly postRepository: Repository<CommentEntity>){
+    constructor(@Inject('COMMENT_REPOSITORY') private readonly commentRepository: Repository<CommentEntity>){
 
     }
 
     async finAll(){
-        const post = await this.postRepository.find();
-        return post;
+        const comments = await this.commentRepository.find();
+        return comments;
     }
 
     async finAOne(id: string){
-        const post = await this.postRepository.findOne({where : {id}});
-        return post;
+        const comments = await this.commentRepository.findOne({where : {id}});
+        return comments;
     }
 
     create(payload : any ){
-        const post = this.postRepository.create()
-        post.comment = payload.comment;
-        post.comment_date = payload.comment_date;
+        const comment = this.commentRepository.create()
+        comment.comment = payload.comment;
+        comment.comment_date = payload.comment_date;
        
 
-        return this.postRepository.save(post);
+        return this.commentRepository.save(comment);
     }
     async update(id: string, payload : any ){
-        const post = await this.postRepository.findOne({where : {id}})
-        post.comment = payload.comment;
-        post.comment_date = payload.comment_date;
+        const comment = await this.commentRepository.findOne({where : {id}})
+        comment.comment = payload.comment;
+        comment.comment_date = payload.comment_date;
 
-        return this.postRepository.save(post)
+        return this.commentRepository.save(comment)
         
     }
     async delete(id : string){
-        const post = await this.postRepository.findOne({where : {id}})
+        const comments = await this.commentRepository.findOne({where : {id}})
 
-        return this.postRepository.delete(id)
+        return this.commentRepository.delete(id)
         
     }
 }
