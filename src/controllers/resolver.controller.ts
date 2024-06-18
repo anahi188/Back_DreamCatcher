@@ -24,9 +24,8 @@ export class ResolverController {
   }
 
   @Put(':id')
-  async updateResolver(@Param('id') id:string, @Body() payload:any){
-    const response = await this.resolverService.update(id, payload)
-    return response;
+  async update(@Param('id') id: string, @Body() payload: any) {
+    return this.resolverService.update(id, payload);
   }
 
 }

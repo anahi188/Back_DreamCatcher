@@ -35,11 +35,14 @@ export class ResolverService {
   }
 
   async update(id: string, payload: any) {
-    console.log("Actualiza", payload)
+    console.log("Actualiza", payload);
     const resolver = await this.resolverRepository.findOne({ where: { id } });
+    if (!resolver) {
+      throw new BadRequestException('Resolver not found');
+    }
     resolver.suspended_account = payload.suspended_account;
     resolver.status = payload.status;
-    
+
     return this.resolverRepository.save(resolver);
   }
 }
