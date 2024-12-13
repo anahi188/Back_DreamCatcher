@@ -3,25 +3,25 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import * as express from 'express';
 import { join } from 'path';
+import { existsSync, mkdirSync } from 'fs';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Configuración para servir archivos estáticos desde la carpeta 'uploads/stories'
-  app.use('/uploads/stories', express.static(join(__dirname, '..', 'uploads', 'stories')));
-  app.use('/uploads/posts', express.static(join(__dirname, '..', 'uploads', 'posts')));
-  app.use('/uploads', express.static(join(__dirname, '..', 'uploads')));
+  const uploadsPath = join(__dirname, '..', 'uploads');
 
+  
+  // Verificar y crear las carpetas si no existen
+  if (!existsSync(uploadsPath)) {
+    mkdirSync(uploadsPath, { recursive: true });
+  }
 
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
-      transform: true,
-    }),
-  );
+  app.enableCors({
+    origin: 'http://localhost:4200', // Permite solo este origen
+    methods: 'GET,POST,PUT,DELETE', // Métodos permitidos
+    credentials: true, // Si manejas cookies o autenticación
+  });
 
-  app.enableCors(); 
-  await app.listen(3000);
+  await app.listen(3009);
 }
 bootstrap();
